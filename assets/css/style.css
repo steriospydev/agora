@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  padding-top: 5em;
+  cursor: default;
+  box-sizing: border-box;
+  min-height: 100vh;
+  margin-bottom: 2rem; 
+  
+}
+
+html {
+  font-family: sans-serif;  
+  line-height: 1.15;  
+  -ms-text-size-adjust: 100%;  
+  -webkit-text-size-adjust: 100%; 
+}
+
+/* Table */
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+
+tbody{
+  color: #f8f8f8;
+  background-color: #2c2c2c;
+}
+thead tr{
+  border:none;
+  background-color: #ffc107;
+  color: #000000;
+}
+
+table tr td:last-child{
+  background-color: #ffc107;
+}
+
+thead th:last-child {
+  background-color: #2c2c2c;
+  color: hsl(0, 11%, 96%);
+}
+
+table th,
+table td {
+  border: 1px solid #aaa;
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  /* background-color: #66aa2f; */
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 800px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+.detail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,17 @@
+Order
+    -   order_id PK
+    -   total_quantity float: default=00.00
+    -   total_taxes float: default=00.00
+    -   total_amount float: default=00.00
+
+OrderItem
+    -   id uuid4 PK
+    -   product_id FK  1 -> many
+    -   shop_id FK  1 -> many
+    -   order_id FK 1 -> many
+    -   quantity float: default=00.00
+    -   unit_price float: default=00.00
+    -   amount float: default=00.00
+    -   source: char(50) null
+    -   tax bool : default=True       
+

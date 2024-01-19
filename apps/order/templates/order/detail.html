@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Παραγγελία {{ obj.id }}{% endblock %}
+
+{% block content %}
+{% include 'misc/page_title.html' with title=page_title %}
+
+<div class="container">
+  {{ obj.id}}
+  <div class="row g-1">
+    <div class="col-lg-2 col-sm-6 col-6">
+      <div class="card shadow mb-2 bg-success bg-gradient rounded">
+        <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex bg-light p-1 rounded-3 justify-content-center">
+                <a type="button" href="{% url 'order:add-product' order_id=obj.id %}" 
+                  class="btn btn-outline-success">
+                  Εισαγώγη Προιόντος
+                </a>
+              </div>             
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2 col-sm-6 col-6">
+        <div class="card shadow mb-2 bg-body rounded">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="media-body text-center">   
+                            <h3> <a type="button" 
+                                href="{% url 'order:order-update' order_id=obj.id %}" 
+                                class="btn btn-outline-danger">Επιπλέον
+                                <i class="fa-solid fa-plus"></i>
+                            </a></h3>                       
+                            <span>{{obj.additional_costs}}<i class="fa-solid fa-euro-sign"></i></span>
+                        </div>  
+                    </div>               
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-6 col-6">
+        <div class="card shadow mb-2 bg-body rounded">
+        <div class="card-content">
+            <div class="card-body">
+            <div class="media d-flex ">
+                <div class="media-body text-center">
+                    <h3> Μερικό</h3>
+                    <span>{{obj.total_costs}} <i class="fa-solid fa-euro-sign"></i></span>
+                </div>  
+            </div>             
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-sm-6 col-6">
+        <div class="card shadow mb-2 bg-body rounded">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="media-body text-center">
+                            <h3 class="">
+                                Φοροι 
+                            </h3>
+                            <span class="text-dark">{{obj.total_taxes}} <i class="fa-solid fa-euro-sign"></i></span>
+                            
+                        </div>  
+                    </div>               
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="col-lg-4 col-sm-6 col-12">
+        <div class="card shadow mb-2 bg-body rounded">
+            <div class="card-content ">
+                <div class="card-body ">
+                    <div class="media d-flex text-center">
+                        <div class="media-body">
+                            <h3 class="text-danger ">Συνολο</h3>
+                            <span class="text-danger"><strong>{{obj.total_amount}} <i class="fa-solid fa-euro-sign"></i></strong> </span>
+                        </div>  
+                    </div>               
+                </div>
+            </div>
+        </div>
+    </div>     
+  </div>
+</div>
+
+<div class="container pt-3">
+    <table>        
+        <thead>
+          <tr class="bg-gradient">
+            <th scope="col">Προιον</th>         
+            <th scope="col">ΛΧ</th>
+            <th scope="col">Ποσοτητα</th>
+            <th scope="col">Τιμη &#8364;</th>
+            <th scope="col">Φοροι &#8364;</th>
+            <th scope="col">Μερικο &#8364;</th>
+            <th scope="col">Συνολο &#8364;</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% if objs %}
+                {% for obj in objs %}
+                    <tr >
+                        <td data-label="Προιον">{{obj.product}}</td>
+                        <td data-label="ΛΧ">{{obj.shop}}</td>
+                        <td data-label="Ποσοτητα">{{obj.quantity}}</td>
+                        <td data-label="Τιμη &#8364;">{{obj.unit_price}}</td>
+                        <td data-label="Φοροι &#8364;">{{obj.taxes}}</td>
+                        <td data-label="Μερικο &#8364;">{{obj.amount}}</td>
+                        <td data-label="Συνολο &#8364;">{{obj.total}}</td>                    
+                        <td data-label="Actions">
+                        <a  href ="{% url 'order:update-product' item_id=obj.id%}" 
+                            class="btn btn-primary">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a data-bs-toggle="modal"
+                        data-bs-target="#exampleModal-{{obj.id}}"
+                            class="btn btn-danger">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>                                      
+                        </td>
+                        <!-- Delete Modal -->
+                        <div class="modal fade"
+                        id="exampleModal-{{obj.id}}" tabindex="-1" 
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Αφαιρεση {{obj.product}}</h5>
+                                        <button type="button" class="btn-close"
+                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Προσοχή!Οριστική αφαιρεση προιόντος απο την παραγγελία. 
+                                        Είστε σίγουροι πως θέλετε να αφαιρέσετε το {{obj.product}} απο την παραγγελία ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a type="button" class="btn btn-primary"
+                                        data-bs-dismiss="modal">Ακύρωση</a>
+                                        <a type="submit"
+                                        href="{% url 'order:remove-product' id=obj.id order_id=obj.order.id %}"
+                                        class="btn btn-danger me-1">Δαγραφη</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>      
+                    </tr>
+                {% endfor %}
+            {% else %}
+                {% include 'misc/empty_table.html' with msg='προιόντα στην παραγγελία' %}
+            {% endif %}
+        </tbody>
+      </table>
+</div>
+{% endblock %}

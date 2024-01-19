@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Μαγαζιά{% endblock %}
+
+{% block content %}
+{% include 'misc/page_title.html' with title='Μαγαζιά' %}
+<div class="container d-flex justify-content-end w-75 pb-2">
+  <a href="{% url 'supplier:supplier-list' %}"
+       class="btn btn-success bg-gradient me-1">
+            Λίστα Προμηθευτών
+            <i class="fa-solid fa-list"></i>
+   <a type="button" href="{% url 'supplier:shop' %}"
+   class="btn btn-primary bg-gradient">Μαγαζιά<i class="fa-solid fa-shop"></i></a>
+</div>
+{% include 'misc/form.html' %}
+
+<div class="container py-3 mt-2 w-75 rounded-4">
+    <table class="mt-2 rounded-4">
+      <thead>
+        <tr class="bg-gradient">
+          <th scope="col">Καταστημα</th>
+          <th scope="col">Προμηθευτης</th>   
+          <th scope="col">Actions</th>       
+        </tr>
+      </thead>
+      <tbody>
+          {% for obj in objs %}
+              <tr>
+                  <td data-label="Καταστημα">{{obj.shop_code}}</td>
+                  <td data-label="Προμηθευτης"> {{obj.supplier_id}}</td>
+                  <td >
+                    {% if obj.assigned %}
+                      <div class="btn-group" role="group">
+                          <form action="{% url 'supplier:supplier-shop-delete' shop_id=obj.id %}" method="post">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-danger me-1">Δαγραφη</button>
+                          </form>
+                          
+                      </div>
+                    {% else %}
+                        <a type="button" href="{% url 'supplier:supplier-shop-connect' %}" class="btn btn-success">Συνδεση</a>
+                    {% endif %}
+                   
+                  </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

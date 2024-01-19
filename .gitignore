@@ -1,0 +1,20 @@
+venv/
+data/*
+.env
+__pycache__
+frontend/
+
+**/migrations/
+static_root/
+charts/
+
+/static_root/*
+
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+vercel.json

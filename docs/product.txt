@@ -1,0 +1,21 @@
+Category
+    -   category_id uuid4 PK
+    -   category_name char(50)
+
+Variant
+    -   variant_id uuid4 PK
+    -   variant_name CHAR(50), NN
+    -   summary char(200)
+
+Product
+    **  QUALITIES = [("A", "A"), ("B", "B"), ("Γ", "Γ")]
+    -   product_id uuid4 PK
+    -   name char(50) NN
+    -   category_id FK
+    -   variant_id FK
+    -   quality choice(QUALITIES)
+
+    *  unique_together = ['name', 'quality', "variant"]
+
+    
+ 

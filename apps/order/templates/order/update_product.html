@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Επεξεργασία Προιόντος{% endblock %}
+
+{% block content %}
+
+{% include 'misc/page_title.html' with title='Επεξεργασία Προιόντος' %}
+<div class="container d-flex justify-content-end pb-2 w-75">
+    <a type="button" href="{% url 'product:product' %}"
+       class="btn btn-success bg-gradient me-2">Προιόντα <i class="fa-solid fa-list"></i></a></a>
+    <a type="button" href="{% url 'supplier:shop' %}"
+   class="btn btn-primary bg-gradient">Μαγαζιά<i class="fa-solid fa-shop"></i></a>
+</div>
+{% include 'misc/form.html' %}
+
+{% endblock %}

@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ obj.company }}{% endblock %}
+
+{% block content %}
+{% include 'misc/page_title.html' with title='Στοιχεία Προμηθευτή' %}
+
+<!-- Buttons -->
+<div class="container w-75 p-3 shadow-lg rounded-4 text-center">
+    <a href="{% url 'supplier:supplier-list' %}"
+       class="btn btn-success m-1">
+            Λίστα Προμηθευτών
+            <i class="fa-solid fa-list"></i>
+    </a>
+    <a href="{% url 'supplier:supplier-update' obj.id %}" class="btn btn-primary m-1">Επεξεργασία <i class="fa-solid fa-gears"></i></a>
+    <a href="{% url 'supplier:supplier-shop-connect' %}"
+        class="btn btn-warning m-1">
+        Συνδεση Καταστήματος
+        <i class="fa-solid fa-link"></i></a>
+    
+     
+</div>
+
+<div class="container w-75 pt-3">
+    <div class="row g-1">
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card shadow p-3 mb-5 rounded">
+            <div class="card-content">
+                <div class="card-body">
+                <div class="media d-flex ">
+                    <div class="media-body text-center">
+                        <h3 class=""><i class="fa-solid fa-user text-success"></i> Επωνυμία</h3>
+                        <span>{{obj.company}}</span>
+                    </div>  
+                </div>
+               
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card shadow p-3 mb-5 rounded">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-center">
+                                <h3 class="">
+                                    <i class="fa-solid fa-phone text-primary"></i>
+                                    Τηλ.
+                                </h3>
+                                <span>{{obj.phone}}</span>
+                            </div>  
+                        </div>               
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card shadow p-3 mb-5 bg-body rounded">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex ">
+                            <div class="media-body text-center">
+                                <h3><i class="fa-solid fa-location-dot text-danger"></i> Έδρα</h3>
+                                <span>{% if obj.city %}{{obj.city}}{%else%}Δεν εχει οριστεί{%endif%}</span>
+                            </div> 
+                        </div>               
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card shadow p-3 mb-5 bg-body rounded">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-center">
+                                <h3><i class="fa-solid fa-briefcase text-info"></i> Α.Φ.Μ.</h3>
+                                <span>{{obj.tin}}</span>
+                            </div>  
+                        </div>               
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card shadow p-3 mb-5 bg-body rounded">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-center">
+                                <h3 class=""><i class="fa-solid fa-store text-warning"></i> Μαγαζι</h3>
+                                <span>{% if shop.shop_id %}{{shop.shop_id }}{%else%}Δεν εχει οριστεί{%endif%}</span>
+                            </div>   
+                        </div>               
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card shadow mb-5 rounded">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-center">
+                                <h3><i class="fa-solid fa-bookmark text-warning"></i> Περιγραφή</h3>
+                                <span>{% if obj.summary %}{{obj.summary}}{%else%}Δεν εχει οριστεί{%endif%}</span>
+                            </div>   
+                        </div>               
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+<div class="container w-75 text-center">
+    <div class="row">
+        <div class="col-8">
+            <div class="alert alert-primary" role="alert">
+                ID: {{obj.id}}
+              </div>
+        </div>
+        <div class="col-4 text-end">
+            <button type="button" class="btn btn-danger"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Δαγραφη Προμηθευτή <br>{{obj}}
+            </button>   
+        </div>
+    </div>   
+
+</div>
+
+  <!-- Delete Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Διαγραφή {{obj.company}}</h5>
+          <button type="button" class="btn-close"
+           data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Προσοχή!Οριστική διαγραφή προμηθευτή. Είστε σίγουροι πως θέλετε να διαγράωετε τον{{obj.company}}?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ακύρωση</button>
+          <form action="{% url 'supplier:supplier-detail' id=obj.id %}"
+          method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger me-1">Δαγραφη</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {% include 'misc/page_title.html' with title='Στατιστικά Προμηθευτή' %}
+  
+  
+  
+  <div class="container mt-2 mb-2 w-75">        
+    {% if q_img %}
+        <div class="card mb-3" >
+            <div class="row g-0">
+              <div class="col-12">
+                <img src="data:image/png;base64,{{ q_img }}" style="width: 100%; height: auto;" alt="Chart">
+            </div>
+        </div>
+        </div>
+        <div class="card mb-3" >
+            <div class="row g-0">
+              <div class="col-12">
+                <img src="data:image/png;base64,{{ a_img }}" style="width: 100%; height: 100%;" alt="Chart">
+            </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if not a_img and not q_img %}
+            <div class="col-12">
+                <figure class="img-thumbnail">
+                    <div class="container rounded-4 pt-2 text-center">
+                        <div class="alert alert-danger" role="alert">
+                            <h3>Δεν υπάρχουν ακόμα Προιόντα αγορασμένα<br> απο τον προμηθευτή</h3>
+                        </div>                        
+                    </div>
+                </figure>
+            </div>
+    {% endif %}
+    </div>
+  </div>
+{% endblock %}

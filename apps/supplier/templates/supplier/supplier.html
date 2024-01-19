@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Προμηθευτές{% endblock %}
+
+{% block content %}
+{% include 'misc/page_title.html' with title='Προμηθευτές' %}
+{% include 'supplier/misc/supplier_index.html' %}
+<div class="container d-flex justify-content-end w-75 pb-2">
+  <a href="{% url 'supplier:supplier-list' %}"
+       class="btn btn-success bg-gradient me-1">
+            Λίστα Προμηθευτών
+            <i class="fa-solid fa-list"></i>
+   <a type="button" href="{% url 'supplier:shop' %}"
+   class="btn btn-primary bg-gradient">Μαγαζιά<i class="fa-solid fa-shop"></i></a>
+</div>
+{% include 'misc/form.html' %}
+<div class="container pt-3 w-75">
+  <table>
+    <thead>
+      <tr class="bg-gradient">
+        <th scope="col">Επωνυμια</th>
+        <th scope="col">Τηλεφωνο</th>
+        <th scope="col">Εδρα</th>
+        <th scope="col">ΑΦΜ</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for obj in objs %}
+            <tr>
+                <td data-label="Επωνυμια">{{obj.company}}</td>
+                <td data-label="Τηλεφωνο">{% if obj.phone %}{{obj.phone}}{% else %} - {%endif%}</td>
+                <td data-label="Εδρα">{% if obj.city %}{{obj.city}}{% else %} - {%endif%}</td>
+                <td data-label="ΑΦΜ">{{obj.tin}}</td>
+                <td data-label="Actions">
+                    <a type="button" href ="{{ obj.get_absolute_url}}"
+                     class="btn btn-primary bg-gradient"><i class="fa-solid fa-circle-info"></i></button>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

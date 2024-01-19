@@ -1,0 +1,24 @@
+<div class="container pb-2">
+   <div class="row ps-5 g-1">
+      <div class="col-lg-2 col-md-3 text-end">
+         <a type="button" href="{% url 'payment:payment' %}"
+         class="btn btn-primary me-2 bg-gradient">Πληρωμες <i class="fa-solid fa-list"></i>
+         </a>
+      </div>
+      <div class="col-lg-5 col-md-5 text-center">
+         <a type="button" href="{% url 'payment:payee' %}"  
+            class="btn btn-success bg-gradient me-2">Παραλήπτες <i class="fa-solid fa-users"></i>
+         </a>
+         <a type="button" href="{% url 'payment:payee-label' %}" 
+            class="btn btn-warning bg-gradient  me-2">Κατηγορίες <i class="fa-solid fa-tags"></i></a>
+      </div>
+      <div class="col-lg-5 col-md-4 text-center">
+         <a type="button" href="{% url 'payment:income' %}" 
+            class="btn btn-primary bg-gradient">Εσοδα <i class="fa-solid fa-coins"></i></a>
+         <a type="button" href="{% url 'payment:source' %}" 
+            class="btn btn-dark bg-gradient me-2">Πηγες Εσόδων <i class="fa-solid fa-vault"></i></a>
+      </div>
+   </div>
+   
+   
+</div>

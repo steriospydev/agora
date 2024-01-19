@@ -1,0 +1,18 @@
+Cards:
+1.  Orders
+    -  Total Orders 
+    -  Total Taxes 
+    -  Total Cost 
+    -  Total Additional Costs
+
+2.  Payments
+    -   Total Payments
+    -   Total Amount
+3.  Assets
+    -   Total Products
+    -   Total Categories
+    -   Total Variants
+    -   Total Suppliers
+
+
+

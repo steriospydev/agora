@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Επεξεργασία Προμηθευτή{% endblock %}
+
+{% block content %}
+{% include 'misc/page_title.html' with title='Επεξεργασια Προμηθευτή' %}
+<div class="container d-flex justify-content-end pb-2 w-75">
+    <a type="button" href="{% url 'supplier:shop' %}"
+   class="btn btn-primary bg-gradient me-1">Μαγαζιά<i class="fa-solid fa-shop"></i></a>
+   {% include 'supplier/misc/connect_shop_button.html' %}
+</div>
+   
+</div>
+{% include 'misc/form.html' %}
+
+{% endblock %}

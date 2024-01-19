@@ -1,0 +1,19 @@
+Supplier:
+    -   supplier_id     uuid4 PK
+    -   name         char(50), NN 
+    -   phone           int(10) null 
+    -   city            char(50) null
+    -   tax_code        int(9) UNIQUE null 
+    -   summary         char(250) null
+
+
+Shop
+    -   id uuid4 PK
+    -   name str(4), UNIQUE 
+
+
+SupplierShop
+    -   id uuid4 PK
+    -   shop_id FK
+    -   supplier_id FK
+    ** unique_together=[shop_id, supplier_id]

@@ -1,0 +1,34 @@
+<nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark bg-gradient p-4">
+    <div class="container mx-auto ">
+        <a href="{% url 'dash:dashboard' %}" class="navbar-brand">Green <i class="fa-solid fa-leaf text-success bg-white rounded-4 p-1"></i> Dream</a>
+        {% if request.user.is_authenticated %}
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto ">
+                    <a href="{% url 'dash:dashboard' %}" class="nav-item nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">Dashboard</a> 
+                    <a href="{% url 'order:order-list' %}" class="nav-item nav-link {% if request.resolver_match.url_name == 'add-product' %}active{% endif %}{% if request.resolver_match.url_name == 'order-list' %}active{% endif %}{% if request.resolver_match.url_name == 'order-detail' %}active{% endif %}">
+                        Παραγγελίες</a>                
+                    <a href="{% url 'payment:payment' %}"
+                        class="nav-item nav-link {% if request.resolver_match.url_name == 'payment' %}active{% endif %}{% if request.resolver_match.url_name == 'payee' %}active{% endif %}{% if request.resolver_match.url_name == 'payee-label' %}active{% endif %}">
+                        Εσοδα/Εξοδα</a> 
+                    <a href="{% url 'product:product' %}"
+                        class="nav-item nav-link {% if request.resolver_match.url_name == 'product' %}active{% endif %}{% if request.resolver_match.url_name == 'category' %}active{% endif %}{% if request.resolver_match.url_name == 'variant' %}active{% endif %}">
+                        Προιόντα</a>                 
+                    <a href="{% url 'supplier:supplier-list' %}"
+                    class="nav-item nav-link  {% if request.resolver_match.url_name == 'supplier-list' %}active{% endif %}{% if request.resolver_match.url_name == 'shop' %}active{% endif %}">
+                    Προμηθευτές</a> 
+                    
+                    <a href="{% url 'account:logout' %}"
+                        class="nav-item nav-link rounded-3 text-danger">Εξοδος 
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i></a>   
+                                
+                </div>
+                
+                
+            </div>
+        {%endif %}
+    </div>
+</nav>

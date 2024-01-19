@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Συνδεση Κωδ.Μαγαζιου - Προμηθευτή{% endblock %}
+
+{% block content %}
+
+{% include 'misc/page_title.html' with title='Συνδεση Κωδ. Μαγαζιου - Προμηθευτή' %}
+<div class="container d-flex justify-content-end pb-2 w-75">
+    <a type="button" href="{% url 'supplier:supplier-list' %}"
+     class="btn btn-primary bg-gradient m-2">Δημιουργία Προμηθευτή</a>
+    <a type="button" href="{% url 'supplier:shop' %}" 
+    class="btn btn-success m-2">Δημιουργία Μαγαζιού</a>
+</div>
+
+{% include 'misc/form.html' %}
+
+{% endblock %}
