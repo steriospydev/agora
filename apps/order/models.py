@@ -15,14 +15,14 @@ from apps.supplier.models import Shop
 class Order(TimeStampedModel):
     id = models.UUIDField(primary_key=True,
                           default=uuid.uuid4, editable=False)
-    total_costs = models.DecimalField(max_digits=8,decimal_places=2,
+    total_costs = models.DecimalField(max_digits=12,decimal_places=2,
                                       default=00.00, blank=True)
-    total_taxes = models.DecimalField(max_digits=8,decimal_places=2,
+    total_taxes = models.DecimalField(max_digits=12,decimal_places=2,
                                       default=00.00, blank=True)
-    additional_costs = models.DecimalField(max_digits=8,decimal_places=2,
+    additional_costs = models.DecimalField(max_digits=12,decimal_places=2,
                                            default=00.00, blank=True)
     
-    total_amount = models.DecimalField(max_digits=8,decimal_places=2,
+    total_amount = models.DecimalField(max_digits=12,decimal_places=2,
                                        default=00.00, blank=True)
     
     class Meta:
@@ -92,7 +92,7 @@ class OrderItem(TimeStampedModel):
         return self.quantity * self.unit_price
     
     def get_tax_total(self):
-        return self.get_amount() * (self.tax_rate /Decimal(100))
+        return self.get_amount() * (self.tax_rate /Decimal('100'))
 
     def get_total(self):
         return self.get_amount() + self.get_tax_total()

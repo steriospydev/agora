@@ -60,7 +60,9 @@ def add_product(request, order_id):
 
     if request.method == 'POST':
         form = OrderItemForm(request.POST, order_id=order_id)
+        
         if form.is_valid():
+            print(f'Quantity: {type(form.cleaned_data["quantity"])}, Unit Price: {type(form.cleaned_data["unit_price"])}, Tax Rate: {type(form.cleaned_data["tax_rate"])}')
             form.save()
             messages.success(request, "Επιτυχής Εισαγωγή Προιόντος")
             return redirect('order:order-detail',id=order_id)
