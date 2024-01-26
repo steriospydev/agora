@@ -11,7 +11,7 @@
     <table>
         <thead>
             <tr class="bg-gradient">
-            <th scope="col">ID</th>
+            <!-- <th scope="col">ID</th> -->
             <th scope="col">Ημερομηνια</th>
             <th scope="col">Κοστος &#8364;</th>
             <th scope="col">Φορος &#8364;</th>
@@ -23,7 +23,7 @@
         <tbody>
             {% for obj in objs %}
                 <tr>
-                    <td data-label="ID">{{obj}}</td>
+                    <!-- <td data-label="ID">{{obj}}</td> -->
                     <td data-label="Ημερομηνια">{{obj.formatted_created_at}}</td>
                     <td data-label="Κοστος">{{obj.total_costs}}</td>
                     <td data-label="Φορος">{{obj.total_taxes}}</td>
