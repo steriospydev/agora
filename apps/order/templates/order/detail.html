@@ -108,7 +108,7 @@
             {% if objs %}
                 {% for obj in objs %}
                     <tr >
-                        <td data-label="Προιον">{{obj.product}}</td>
+                        <td data-label="Προιον"><a href="{% url 'product:stats' obj.product.id %}">{{obj.product}}</a></td>
                         <td data-label="ΛΧ">{{obj.shop}}</td>
                         <td data-label="Ποσοτητα">{{obj.quantity}}</td>
                         <td data-label="Τιμη &#8364;">{{obj.unit_price}}</td>

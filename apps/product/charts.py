@@ -55,15 +55,19 @@ def get_data_chart(x_data, y_data, title):
 
 def get_price_chart(x_data, y_data, title, y_label):
     plt.figure(figsize=(10, 6))
-    sns.set_style("darkgrid", {"grid.color": ".2", "grid.linestyle": ":"})
-    plt.scatter(x_data, y_data, marker="x")
+    sns.set_style("darkgrid", {"grid.color": ".5", "grid.linestyle": ":"})
+    plt.scatter(x_data, y_data, marker="o")
  
     plt.title(title)
     plt.ylabel(y_label)
-    plt.xticks(rotation=45)
+    plt.xticks([])
     for date, value in zip(x_data, y_data):
         label = format_label(date, value)
-        plt.annotate(label, (date, value), textcoords="offset points", xytext=(0, 10), ha='center')
+        plt.annotate(label, (date, value),
+                     textcoords="offset points",
+                     xytext=(0, 5),
+                     ha='left')
+    plt.ylim([0, 5])  
     buffer = BytesIO()
     plt.savefig(buffer, format='png')
     buffer.seek(0)
