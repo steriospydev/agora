@@ -11,6 +11,7 @@ body {
   box-sizing: border-box;
   min-height: 100vh;
   margin-bottom: 10rem; 
+  scroll-behavior:smooth;
   
 }
 
@@ -19,6 +20,7 @@ html {
   line-height: 1.15;  
   -ms-text-size-adjust: 100%;  
   -webkit-text-size-adjust: 100%; 
+  scroll-behavior:smooth;
 }
 
 .form_color {

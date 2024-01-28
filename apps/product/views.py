@@ -39,7 +39,6 @@ def product_stats(request, id):
     context['obj'] = obj
     return render(request, 'product/product_stats.html', context)
 
-
 @login_required
 def delete_product(request, id):
     obj = get_object_or_404(Product, id = id)

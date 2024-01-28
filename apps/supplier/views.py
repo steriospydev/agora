@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
 
 from .charts import construct_supplier_charts
 from .models import Supplier, Shop, SupplierShop
@@ -10,6 +12,34 @@ from .forms import (SupplierForm, SupplierUpdateForm,
 
 from apps.order.models import OrderItem
 
+class SupplierView(LoginRequiredMixin, View):
+    template_name = 'supplier/supplier.html'
+    login_url = 'your_login_url' 
+
+    def get_context_data(self, form):
+        objs = Supplier.objects.all()
+        context = {
+            'objs': objs,
+            'form': form,
+            'supplier_count': objs.count(),
+            'shop_count': Shop.objects.count()
+        }
+        return context
+
+    def get(self, request, *args, **kwargs):
+        form = SupplierForm()
+        return render(request, self.template_name, self.get_context_data(form))
+
+    def post(self, request, *args, **kwargs):
+        form = SupplierForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Επιτυχής Προσθήκη Προμηθευτή")
+            return redirect("supplier:supplier-list")
+
+        return render(request, self.template_name, self.get_context_data(form))
+    
 # List objects
 @login_required
 def supplier(request):
