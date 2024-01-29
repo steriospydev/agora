@@ -18,10 +18,6 @@ def create_instance(request, form_class,
     return render(request, template_name, context)
 
 
-
-
-# Create your models here.
-
 class TimeStampedModel(models.Model):
     """
     An abstract base class model that provides self-updating

@@ -85,3 +85,5 @@ including small business owners, entrepreneurs and farmers.
 - [Database Design](/docs/Requirements-Specification.md)
 - [Model Dependency](/docs/Agora_Models.png)
 - [API Design](/docs/Api_Design.md)
+- [Architecture Overview](/docs/Architecture_Overview.md)
+- [Architecture Diagram](/docs/Architecture_Diagram.png)
