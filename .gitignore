@@ -20,8 +20,8 @@ db.sqlite3
 media
 vercel.json
 
-assets/debug_toolbar
-assets/import_export
+/assets/debug_toolbar/*
+/assets/import_export/*
 
 INFO
 to.TODO
