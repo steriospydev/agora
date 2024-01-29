@@ -20,7 +20,9 @@ db.sqlite3
 media
 vercel.json
 
-assets/
+/assets/admin/
+
+
 
 INFO
 to.TODO
