@@ -21,8 +21,7 @@ media
 vercel.json
 
 /assets/admin/
-/assets/debug_toolbar/
-/assets/import_export/
+assets
 
 
 INFO
