@@ -26,14 +26,25 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 'whitenoise.runserver_nostatic',
-
+    'rest_framework',
     # own apps
     'apps.account.apps.AccountConfig',
     'apps.dash.apps.DashConfig',
     'apps.supplier.apps.SupplierConfig',
     'apps.product.apps.ProductConfig',
     'apps.order.apps.OrderConfig',
-    'apps.payment.apps.PaymentConfig' ]
+    'apps.payment.apps.PaymentConfig'
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

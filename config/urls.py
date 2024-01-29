@@ -8,11 +8,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.dash.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
-    path('account', include('apps.account.urls')),
+    path('account/', include('apps.account.urls')),
     path('supplier/', include('apps.supplier.urls')),
     path('order/', include('apps.order.urls')),
     path('payment/', include('apps.payment.urls')),
-    path('product/', include('apps.product.urls'))
+    path('product/', include('apps.product.urls')),
+    path('supplier-api/', include('apps.supplier.api.urls'))
 ]
 
 if settings.DEBUG:
