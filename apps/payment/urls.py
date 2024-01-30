@@ -27,5 +27,6 @@ urlpatterns = [
       path('income/', views.income, name='income'),
       path('income/<str:id>/delete/', views.delete_income,
           name='income-delete'),  
-
+      # statistics
+      path('statistics/', views.payment_statistics, name='statistics')
 ]

@@ -17,10 +17,12 @@ body {
 
 html {
   font-family: sans-serif;  
-  line-height: 1.15;  
+  font-size: 16px;
+  line-height: 1.6; 
   -ms-text-size-adjust: 100%;  
   -webkit-text-size-adjust: 100%; 
   scroll-behavior:smooth;
+  letter-spacing: 0.02em;
 }
 
 .form_color {
@@ -128,3 +130,16 @@ table th {
   transform: translate(-50%, -50%);
 }
 
+.page_title {
+  letter-spacing: 0.06em;
+}
+
+.subheader:after{
+  content: "";
+  display: block; /* Make the pseudo-element a block-level element */
+  width:200px;
+  border-radius: 2rem;
+  border-bottom: 10px solid black; /* Add a black solid line at the bottom */
+  margin-top: 5px; /* Adjust the margin to control the spacing between text and line */
+
+}
