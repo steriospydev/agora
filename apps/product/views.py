@@ -1,8 +1,7 @@
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.views.generic import DetailView
 
 from config.utils import BaseListView, BaseDeleteView
+
 from .models import Category, Variant, Product
 from .forms import ProductForm, CategoryForm, VariantForm
 from .charts import construct_product_charts
@@ -17,7 +16,6 @@ class ProductListView(BaseListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Additional variables specific to ProductListView
         context['total_variants'] = Variant.objects.count()
         context['total_categories'] = Category.objects.count()
         context['total_products'] = Product.objects.count()
@@ -35,7 +33,6 @@ class VariantListView(BaseListView):
     form_class = VariantForm
     success_message = "Επιτυχής Δημιουργία Ποικιλίας"
 
-
 class ProductDeleteView(BaseDeleteView):
     model = Product
     redirect_url = 'product:product'
@@ -51,13 +48,18 @@ class VariantDeleteView(BaseDeleteView):
     redirect_url = 'product:variant'
     success_message = 'Διαγραφηκε η ποικιλία: {}'
 
-@login_required
-def product_stats(request, id):
-    obj = get_object_or_404(Product, id=id)
-    context = {}
+class ProductStatsView(DetailView):
+    model = Product
+    template_name = 'product/product_stats.html'
+    context_object_name = 'obj'
+    slug_field = 'id' 
+    slug_url_kwarg = 'uuid' 
 
-    data = OrderItem.objects.filter(product=obj)
-    if data:        
-        context['data_summary'], context['price_track'] = construct_product_charts(data)  
-    context['obj'] = obj
-    return render(request, 'product/product_stats.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        data = OrderItem.objects.filter(product=self.object)
+        if data:
+            context['data_summary'], context['price_track'] = construct_product_charts(data)
+
+        return context
