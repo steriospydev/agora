@@ -40,6 +40,7 @@ class Product(TimeStampedModel):
 
     class Meta:
         unique_together = ['product_name', 'quality', "variant"]
+        ordering = ['product_name']
 
     def __str__(self):
         return f'{self.product_name} {self.quality} {self.variant}'

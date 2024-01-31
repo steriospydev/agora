@@ -14,6 +14,7 @@
 {% include 'misc/form.html' %}
 
 <div class="container py-3 mt-2 w-75 rounded-4">
+    
     <table class="mt-2 rounded-4">
       <thead>
         <tr class="bg-gradient">
@@ -70,6 +71,20 @@
           {% endfor %}
       </tbody>
     </table>
+    <div class="container pt-2 text-end">    
+        <span class="step-links mx-auto ">
+            <a class="btn  btn-primary {% if not page_obj.has_previous %}disabled{% endif %}"
+               href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}">&laquo; Προηγόυμενη</a>             
+            <a class="btn btn-dark" href="?page=1">Αρχικη</a>
+            <span class="btn btn-light disabled">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>  
+            <a class="btn btn-dark" href="?page={{ page_obj.paginator.num_pages }}">Τελευταία</a> 
+            <a  class="btn btn-primary {% if not page_obj.has_next %}disabled{% endif %}"
+                href="{% if  page_obj.has_next %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}">Επόμενη &raquo;</a>
+        </span>
+    </div>
 </div>
+
 
 {% endblock %}
