@@ -52,7 +52,7 @@ class ProductStatsView(DetailView):
     model = Product
     template_name = 'product/product_stats.html'
     context_object_name = 'obj'
-    slug_field = 'id' 
+    slug_field = 'pk' 
     slug_url_kwarg = 'uuid' 
 
     def get_context_data(self, **kwargs):
