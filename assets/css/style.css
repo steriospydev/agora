@@ -10,7 +10,6 @@ body {
   cursor: default;
   box-sizing: border-box;
   min-height: 100vh;
-  /* margin-bottom: 10rem;  */
   scroll-behavior:smooth;
   
 }
@@ -55,6 +54,8 @@ thead tr{
 
 table tr td:last-child{
   background-color: #2c2c2c;
+  color: #e7ece7;
+  font-weight: 600;
 }
 
 /* thead th:last-child {
