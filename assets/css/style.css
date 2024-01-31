@@ -10,7 +10,7 @@ body {
   cursor: default;
   box-sizing: border-box;
   min-height: 100vh;
-  margin-bottom: 10rem; 
+  /* margin-bottom: 10rem;  */
   scroll-behavior:smooth;
   
 }
@@ -42,8 +42,10 @@ table {
 
 
 tbody{
-  color: #f8f8f8;
-  background-color: #2c2c2c;
+  color: #2c2c2c;
+  background-color: #f8f8f8;
+  /* color: #f8f8f8;
+  background-color: #2c2c2c; */
 }
 thead tr{
   border:none;
@@ -55,10 +57,10 @@ table tr td:last-child{
   background-color: #2c2c2c;
 }
 
-thead th:last-child {
+/* thead th:last-child {
   background-color: #d47575;
   color: hsl(0, 11%, 96%);
-}
+} */
 
 table th,
 table td {
@@ -137,9 +139,9 @@ table th {
 .subheader:after{
   content: "";
   display: block; /* Make the pseudo-element a block-level element */
-  width:200px;
+  width:130px;
   border-radius: 2rem;
-  border-bottom: 10px solid black; /* Add a black solid line at the bottom */
-  margin-top: 5px; /* Adjust the margin to control the spacing between text and line */
+  border-bottom: 8px solid rgb(89, 153, 206); /* Add a black solid line at the bottom */
+  margin-top: 8px; /* Adjust the margin to control the spacing between text and line */
 
 }
