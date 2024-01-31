@@ -1,35 +1,13 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView
+from django.shortcuts import render, get_object_or_404
 
+from config.utils import BaseListView, BaseDeleteView
 from .models import Category, Variant, Product
 from .forms import ProductForm, CategoryForm, VariantForm
 from .charts import construct_product_charts
 
 from apps.order.models import OrderItem
-
-
-class BaseListView(LoginRequiredMixin, ListView):
-    template_name = ''
-    context_object_name = 'objs'
-    paginate_by = 8
-    form_class = None
-    success_message = None
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = self.form_class() if self.form_class else None
-        return context
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-            if self.success_message:
-                messages.success(request, self.success_message)
-        return self.get(request, *args, **kwargs)
 
 class ProductListView(BaseListView):
     model = Product
@@ -57,24 +35,21 @@ class VariantListView(BaseListView):
     form_class = VariantForm
     success_message = "Επιτυχής Δημιουργία Ποικιλίας"
 
-@login_required
-def delete_product(request, id):
-    obj = get_object_or_404(Product, id = id)
-    obj.delete()
-    messages.error(request, f'Διαγραφηκε το προιόν:{obj}')
-    return redirect('product:product')
 
-@login_required
-def delete_category(request, id):
-    obj = get_object_or_404(Category, id = id)
-    obj.delete()
-    return redirect('product:category')
+class ProductDeleteView(BaseDeleteView):
+    model = Product
+    redirect_url = 'product:product'
+    success_message = 'Διαγραφηκε το προιόν: {}'
 
-@login_required
-def delete_variant(request, id):
-    obj = get_object_or_404(Variant, id = id)
-    obj.delete()
-    return redirect('product:variant')
+class CategoryDeleteView(BaseDeleteView):
+    model = Category
+    redirect_url = 'product:category'
+    success_message = 'Διαγραφηκε η κατηγορια: {}'
+
+class VariantDeleteView(BaseDeleteView):
+    model = Variant
+    redirect_url = 'product:variant'
+    success_message = 'Διαγραφηκε η ποικιλία: {}'
 
 @login_required
 def product_stats(request, id):
