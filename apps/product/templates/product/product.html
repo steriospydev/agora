@@ -6,15 +6,11 @@
 {% block content %}
 
 {% include 'misc/page_title.html' with title='Προιόντα' %}
-
 {% include 'product/misc/product_index.html' %}
-
 {% include 'product/misc/buttons.html' %}
-
 {% include 'misc/form.html' %}
 
-<div class="container py-3 mt-2 w-75 rounded-4">
-    
+<div class="container py-3 mt-2 w-75 rounded-4"> 
     <table class="mt-2 rounded-4">
       <thead>
         <tr class="bg-gradient">
@@ -73,6 +69,5 @@
     </table>
     {% include 'misc/pagination.html' %}
 </div>
-
 
 {% endblock %}

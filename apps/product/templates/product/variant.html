@@ -7,60 +7,55 @@
 
 {% include 'misc/page_title.html' with title='Δημιουργία Ποικιλίας' %}
 {% include 'product/misc/buttons.html' %}
-
 {% include 'misc/form.html' %}
 
 <div class="container py-3 mt-2 w-75 rounded-4">
     <table class="mt-2 rounded-4">
-      <thead>
-        <tr class="bg-gradient">
-          <th scope="col">Ονομα Πικοιλιας</th>       
-          <th scope="col">Περιγραφη</th>  
-          <th scope="col">Actions</th>      
-        </tr>
-      </thead>
-      <tbody>
-          {% for obj in objs %}
-            <tr>
-                <td data-label="Ονομα Πικοιλιας">{{obj.variant_name}}</td>
-                <td data-label="Περιγραφη">               
-                        {{obj.summary}}
-                 
-                </td>
-                <td >
-                <button type="button" class="btn btn-danger"
-                    data-bs-toggle="modal" data-bs-target="#exampleModal-{{obj.id}}">
-                    <i class="fa-solid fa-trash-can"></i></a>  
- 
-                </button>                                      
-                </td>
-                <!-- Delete Modal -->
-                <div class="modal fade" id="exampleModal-{{obj.id}}" tabindex="-1" 
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Διαγραφή {{obj.category_name}}</h5>
-                                <button type="button" class="btn-close"
-                                data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Προσοχή!Οριστική διαγραφή πικοιλίας.
-                                Είστε σίγουροι πως θέλετε να διαγράψετε την πικοιλία {{obj.variant_name}}?
-                            </div>
-                            <div class="modal-footer">
-                                <a type="button" class="btn btn-primary"
-                                data-bs-dismiss="modal">Ακύρωση</a>
-                                <a type="submit"
-                                href="{% url 'product:variant-delete' id=obj.id %}"
-                                class="btn btn-danger me-1">Δαγραφη</a>
+        <thead>
+            <tr class="bg-gradient">
+            <th scope="col">Ονομα Πικοιλιας</th>       
+            <th scope="col">Περιγραφη</th>  
+            <th scope="col">Actions</th>      
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in objs %}
+                <tr>
+                    <td data-label="Ονομα Πικοιλιας">{{obj.variant_name}}</td>
+                    <td data-label="Περιγραφη"> {{obj.summary}}</td>
+                    <td data-label="Actions">
+                        <button type="button" class="btn btn-danger"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal-{{obj.id}}">
+                            <i class="fa-solid fa-trash-can"></i>    
+                        </button>                                      
+                    </td>
+                    <!-- Delete Modal -->
+                    <div class="modal fade" id="exampleModal-{{obj.id}}" tabindex="-1" 
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Διαγραφή {{obj.category_name}}</h5>
+                                    <button type="button" class="btn-close"
+                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Προσοχή!Οριστική διαγραφή πικοιλίας.
+                                    Είστε σίγουροι πως θέλετε να διαγράψετε την πικοιλία {{obj.variant_name}}?
+                                </div>
+                                <div class="modal-footer">
+                                    <a type="button" class="btn btn-primary"
+                                    data-bs-dismiss="modal">Ακύρωση</a>
+                                    <a type="submit"
+                                    href="{% url 'product:variant-delete' id=obj.id %}"
+                                    class="btn btn-danger me-1">Δαγραφη</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>                  
-            </tr>
-        {% endfor %}
-      </tbody>
+                    </div>                  
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
     {% include 'misc/pagination.html' %}
 </div>
