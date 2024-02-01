@@ -2,9 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views import View
 
+from config.utils import BaseListView, BaseUpdateView, BaseDeleteView
 from .charts import construct_supplier_charts
 from .models import Supplier, Shop, SupplierShop
 from .forms import (SupplierForm, SupplierUpdateForm,
@@ -12,100 +11,60 @@ from .forms import (SupplierForm, SupplierUpdateForm,
 
 from apps.order.models import OrderItem
 
-class SupplierView(LoginRequiredMixin, View):
-    template_name = 'supplier/supplier.html'
-    login_url = 'your_login_url' 
+class SupplierListView(BaseListView):
+    model = Supplier
+    template_name = "supplier/supplier.html"
+    form_class = SupplierForm
+    success_message = "Επιτυχής Προσθήκη Προμηθευτή"
 
-    def get_context_data(self, form):
-        objs = Supplier.objects.all()
-        context = {
-            'objs': objs,
-            'form': form,
-            'supplier_count': objs.count(),
-            'shop_count': Shop.objects.count()
-        }
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["supplier_count"] = Supplier.objects.count()
+        context["shop_count"] = Shop.objects.count()
         return context
 
-    def get(self, request, *args, **kwargs):
-        form = SupplierForm()
-        return render(request, self.template_name, self.get_context_data(form))
+class SupplierUpdateView(BaseUpdateView):
+    model = Supplier
+    form_class = SupplierUpdateForm
+    template_name = 'supplier/update.html'
+    success_message = 'Επιτυχής ενημέρωση προμηθευτή'
 
-    def post(self, request, *args, **kwargs):
-        form = SupplierForm(request.POST)
+class ShopListView(BaseListView):
+    model = Shop
+    template_name = 'supplier/shop.html'
+    form_class = ShopForm
+    success_message = 'Επιτυχής προσθήκη Καταστήματος'
 
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Επιτυχής Προσθήκη Προμηθευτή")
-            return redirect("supplier:supplier-list")
+    def get_queryset(self):
+        objs = super().get_queryset()
+        connected_objs = SupplierShop.objects.all()
+        for obj in objs:
+            connected_obj = connected_objs.filter(shop_id=obj.id).first()
+            if connected_obj:
+                obj.supplier_id = connected_obj.supplier_id
+            else:
+                obj.supplier_id = 'Not connected'
+        return objs
 
-        return render(request, self.template_name, self.get_context_data(form))
+class SupplierShopDeleteView(BaseDeleteView):
+    model = SupplierShop
+    redirect_url = 'supplier:shop'
+    success_message = "Επιτυχης Αποσυνδεση {0}"
     
-# List objects
-@login_required
-def supplier(request):
-    objs = Supplier.objects.all()
-
-    if request.method == 'POST':
-        form = SupplierForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Επιτυχής Προσθήκη Προμηθευτή")
-            return redirect("supplier:supplier-list")
-    else:
-        form = SupplierForm()
-
-    context = {
-        'objs': objs,
-        'form': form,
-        'supplier_count': objs.count(),
-        'shop_count': Shop.objects.count()
-    }
-    return render(request, 'supplier/supplier.html', context)
-
-@login_required
-def shop(request):
-    context = {}
-    objs = Shop.objects.all()
-    connected_objs = SupplierShop.objects.all()
-    for obj in objs:
-        connected_obj = connected_objs.filter(shop_id=obj.id).first()
-        if connected_obj:
-            obj.supplier_id = connected_obj.supplier_id
-        else:
-            obj.supplier_id = "Not connected"
-
-    if request.method == 'POST':
-        form = ShopForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Επιτυχής προσθήκη Καταστήματος")
-    else:
-        form = ShopForm()
-    context['form'] = form
-    context['objs'] = objs
-    return render(request, 'supplier/shop.html' , context)
-
-# Create/Update objects
-@login_required
-def supplier_update(request, id):
-    context ={} 
-    obj = get_object_or_404(Supplier, id = id)
-    form = SupplierUpdateForm(request.POST or None, instance = obj)
-    if form.is_valid():
-        form.save()
-        return redirect(obj.get_absolute_url())
-    context["form"] = form
-    return render(request, "supplier/update.html", context)
+    def post(self, request, shop_id):
+        obj = get_object_or_404(self.model, shop_id=shop_id)
+        obj.delete()
+        if self.success_message:
+            messages.success(request, self.success_message.format(obj))
+        return redirect(self.redirect_url)
 
 @login_required
 def supplier_detail(request, id):
     obj = get_object_or_404(Supplier, id=id)    
     context ={}
-
     if request.method == 'POST':        
         obj.delete()
-        return redirect('supplier:supplier-list')   
-    
+        return redirect('supplier:supplier-list')       
     try:        
         shop = SupplierShop.objects.get(supplier_id=id)
         orders = OrderItem.objects.filter(shop=shop.shop_id) 
@@ -136,13 +95,5 @@ def connect_supplier_shop(request):
     context['form'] = form
     return render(request, "supplier/create_connection.html", context)   
 
-# Delete objects
-@login_required
-def supplier_shop_delete(request, shop_id):
-    shop = get_object_or_404(SupplierShop, shop_id=shop_id)
-    if request.method == 'POST':        
-        shop.delete()
-        messages.error(request, f"Επιτυχης Αποσυνδεση {shop}")
-    return redirect('supplier:shop') 
 
 

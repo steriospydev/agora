@@ -46,9 +46,10 @@
                                 <div class="modal-footer">
                                     <a type="button" class="btn btn-primary"
                                     data-bs-dismiss="modal">Ακύρωση</a>
-                                    <a type="submit"
-                                    href="{% url 'product:variant-delete' id=obj.id %}"
-                                    class="btn btn-danger me-1">Δαγραφη</a>
+                                    <form action="{% url 'product:variant-delete' id=obj.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger me-1">Δαγραφη</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

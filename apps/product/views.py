@@ -1,5 +1,4 @@
 from django.views.generic import DetailView
-
 from config.utils import BaseListView, BaseDeleteView
 
 from .models import Category, Variant, Product
@@ -10,7 +9,7 @@ from apps.order.models import OrderItem
 
 class ProductListView(BaseListView):
     model = Product
-    template_name = 'product/product.html'
+    template_name = "product/product.html"
     form_class = ProductForm
     success_message = "Επιτυχής Δημιουργία Προιόντος"
 

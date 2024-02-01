@@ -46,7 +46,7 @@ class Supplier(TimeStampedModel):
             shop.save()            
         except SupplierShop.DoesNotExist:
             supplier_shop = None             
-        return super().delete()
+        super().delete()
 
 class Shop(TimeStampedModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
