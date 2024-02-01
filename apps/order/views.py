@@ -32,9 +32,10 @@ def delete_order(request, id):
 def detail_order(request, id):
     obj = Order.objects.get(id=id)
     objs = OrderItem.objects.filter(order_id=obj)
-    page_title = obj.created_at.strftime('%Y-%m-%d %H:%M')
+    date = obj.created_at.strftime('%Y-%m-%d %H:%M')
     context = {
-        'page_title': page_title,
+        'page_title': obj.id,
+        'date': date,
         'obj': obj,
         'objs': objs
     }

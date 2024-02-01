@@ -48,7 +48,7 @@ tbody{
 }
 thead tr{
   border:none;
-  background-color: #e7ece7;
+  background-color: #5bc95b;
   color: #000000;
 }
 
@@ -58,10 +58,6 @@ table tr td:last-child{
   font-weight: 600;
 }
 
-/* thead th:last-child {
-  background-color: #d47575;
-  color: hsl(0, 11%, 96%);
-} */
 
 table th,
 table td {
@@ -71,7 +67,7 @@ table td {
 }
 
 table th {
-  /* background-color: #66aa2f; */
+  background-color: #f8f8f8;
   font-size: .85em;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -83,7 +79,7 @@ table th {
   }
 
   table caption {
-    font-size: 1.3em;
+    font-size: 2em;
   }
   
   table thead {
@@ -111,11 +107,7 @@ table th {
     text-align: right;
   }
   
-  table td::before {
-    /*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
+  table td::before { 
     content: attr(data-label);
     float: left;
     font-weight: bold;

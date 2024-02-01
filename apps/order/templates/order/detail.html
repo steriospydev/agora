@@ -7,88 +7,34 @@
 {% include 'misc/page_title.html' with title=page_title %}
 
 <div class="container">
-  {{ obj.id}}
-  <div class="row g-1">
-    <div class="col-lg-3 col-sm-6 col-6">
-        <div class="card shadow mb-2 bg-body rounded">
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="media-body text-center">   
-                            <h3> <a type="button" 
-                                href="{% url 'order:order-update' order_id=obj.id %}" 
-                                class="btn btn-danger m-0">
-                               Επιπλέον
-                                <i class="fa-solid fa-plus"></i>
-                            </a></h3>  
-                            <span>{{obj.additional_costs}}   <i class="fa-solid fa-euro-sign"></i>                 
-                            </span>
-                        </div>  
-                    </div>               
-                </div>
-            </div>
+    <div class="row g-1  ">
+        <div class="col-lg-3 col-sm-6 col-6  ">
+            <a type="button" href="{% url 'order:add-product' order_id=obj.id %}" 
+            class="btn btn-primary bg-gradient">
+            <i class="fa fa-plus"></i> Προσθηκη Προιόντος 
+            </a>
+        </div>
+        <div class="text-center col-lg-6 col-sm-12 col-12 order-3 order-lg-0">
+
+            {{ date}}
+
+        </div>
+        <div class=" text-end col-lg-3 col-sm-6 col-6">
+            <a type="button"  href="{% url 'order:order-update' order_id=obj.id %}" 
+            class="btn btn-danger bg-gradient">
+            <i class="fa fa-plus"></i> Επιπλέον,
+             {{obj.additional_costs}} &euro;
+            </a>
         </div>
     </div>
-    <div class="col-lg-3 col-sm-6 col-6">
-        <div class="card shadow mb-2 bg-body rounded">
-        <div class="card-content">
-            <div class="card-body">
-            <div class="media d-flex ">
-                <div class="media-body text-center">
-                    <h3> Μερικό</h3>
-                    <span>{{obj.total_costs}} <i class="fa-solid fa-euro-sign"></i></span>
-                </div>  
-            </div>             
-            </div>
-        </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-sm-6 col-6">
-        <div class="card shadow mb-2 bg-body rounded">
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="media-body text-center">
-                            <h3 class="">
-                                Φοροι 
-                            </h3>
-                            <span class="text-dark">{{obj.total_taxes}} <i class="fa-solid fa-euro-sign"></i></span>
-                            
-                        </div>  
-                    </div>               
-                </div>
-            </div>
-        </div>
-    </div>
-   
-    <div class="col-lg-3 col-sm-6 col-12">
-        <div class="card shadow mb-2 bg-body rounded">
-            <div class="card-content ">
-                <div class="card-body ">
-                    <div class="media d-flex text-center">
-                        <div class="media-body">
-                            <h3 class="text-danger ">Συνολο</h3>
-                            <span class="text-danger"><strong>{{obj.total_amount}} <i class="fa-solid fa-euro-sign"></i></strong> </span>
-                        </div>  
-                    </div>               
-                </div>
-            </div>
-        </div>
-    </div>     
+      
   </div>
 </div>
 
-<div class="container pt-3">
-    <div class="text-end p-2">
-        <a type="button" href="{% url 'order:add-product' order_id=obj.id %}" 
-        class="btn btn-success bg-gradient">
-        <i class="fa fa-plus"></i> Προσθηκη Προιόντος 
-    </a>
-    </div>
-    
+<div class="container pt-3"> 
     <table>        
         <thead>
-          <tr class="bg-gradient">
+          <tr>
             <th scope="col">Προιον</th>         
             <th scope="col">ΛΧ</th>
             <th scope="col">Ποσοτητα</th>
@@ -153,5 +99,53 @@
             {% endif %}
         </tbody>
       </table>
+      <div class="row g-2 mt-2 justify-content-end">
+        <div class="col-lg-3 col-sm-6 col-6">
+            <div class="card shadow bg-body rounded">
+            <div class="card-content">
+                <div class="card-body">
+                <div class="media d-flex ">
+                    <div class="media-body text-secondary text-center">
+                        <h3> Μερικό</h3>
+                        <span>{{obj.total_costs}} <i class="fa-solid fa-euro-sign"></i></span>
+                    </div>  
+                </div>             
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-6">
+            <div class="card shadow bg-body rounded">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-center text-secondary ">
+                                <h3 class="">
+                                    Φοροι 
+                                </h3>
+                                <span class="text-dark">{{obj.total_taxes}} <i class="fa-solid fa-euro-sign"></i></span>
+                                
+                            </div>  
+                        </div>               
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="col-lg-3 col-sm-6 col-6">
+            <div class="card shadow bg-body rounded">
+                <div class="card-content ">
+                    <div class="card-body bg-dark bg-gradient ">
+                        <div class="media d-flex">
+                            <div class="media-body text-warning text-center ">
+                                <h3>Συνολο</h3>
+                                <span><strong>{{obj.total_amount}} <i class="fa-solid fa-euro-sign"></i></strong> </span>
+                            </div>  
+                        </div>               
+                    </div>
+                </div>
+            </div>
+        </div>  
+      </div>
+      
 </div>
 {% endblock %}
