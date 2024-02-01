@@ -11,7 +11,7 @@
                     <a href="{% url 'dash:dashboard' %}" class="nav-item nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">Dashboard</a> 
                     <a href="{% url 'order:order-list' %}" class="nav-item nav-link {% if request.resolver_match.url_name == 'add-product' %}active{% endif %}{% if request.resolver_match.url_name == 'order-list' %}active{% endif %}{% if request.resolver_match.url_name == 'order-detail' %}active{% endif %}">
                         Παραγγελίες</a>                
-                    <a href="{% url 'payment:payment' %}"
+                    <a href="{% url 'payment:statistics' %}"
                         class="nav-item nav-link {% if request.resolver_match.url_name == 'payment' %}active{% endif %}{% if request.resolver_match.url_name == 'payee' %}active{% endif %}{% if request.resolver_match.url_name == 'payee-label' %}active{% endif %}">
                         Εσοδα/Εξοδα</a> 
                     <a href="{% url 'product:product' %}"

@@ -99,9 +99,9 @@ table th {
   
   
   table tr {
-    border-bottom: 3px solid #ddd;
+    border-bottom: 10px solid #a0d781;
     display: block;
-    margin-bottom: .625em;
+    margin-bottom: 1.625em;
   }
   
   table td {
@@ -136,13 +136,16 @@ table th {
 .page_title {
   letter-spacing: 0.06em;
 }
+.subheader{ 
+  color: rgba(228, 58, 58, 0.849);
+}
 
 .subheader:after{
   content: "";
   display: block; /* Make the pseudo-element a block-level element */
-  width:130px;
+  width: 213px;
   border-radius: 2rem;
-  border-bottom: 8px solid rgb(89, 153, 206); /* Add a black solid line at the bottom */
+  border-bottom: 8px solid rgb(93, 141, 230); /* Add a black solid line at the bottom */
   margin-top: 8px; /* Adjust the margin to control the spacing between text and line */
 
 }

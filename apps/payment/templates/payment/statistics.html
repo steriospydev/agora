@@ -11,19 +11,19 @@
 {% include 'payment/misc/buttons.html' %}
 <div class="container rounded-4 mb-4 pb-4">
     <div class="row g-2 mt-3">
-        <div class="col-6">
+        <div class="col-lg-6 col-md-12">
             <div class="card shadow p-2 bg-dark text- rounded">
                 <div class="card-content">
                     <div class="card-body ">
                         <div class="row">
-                            <div class="col-12"  >                            
+                            <div class="col-12">                            
                                 <h5 class="{% if income_to_expense_ratio > 1 %}text-success{% else %}text-danger{% endif %}">                               
                                     <em>Λόγος Εισοδήματος/Δαπάνη</em>
                                 </h5>
                             </div>
                             <div class="col-12 text-light rounded-4">
                                 <h3 class="text-left text-warning ">
-                                    <span class="text-light text-wrap fs-6">Για κάθε &euro; που κερδίζετε, έχεται</span>
+                                    <span class="text-light text-wrap fs-6">Για κάθε &euro; που κερδίζετε, έχεται</span><br>
                                     <em> <i class="fa-solid {% if income_to_expense_ratio > 1 %}fa-caret-up text-success{% else %}fa-caret-down  text-danger{% endif %}"></i>
                                     {{income_to_expense_ratio|floatformat:2 }}
                                     </em>
@@ -35,7 +35,7 @@
                 </div>            
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-12">
             <div class="card shadow p-2 bg-dark text- rounded">
                 <div class="card-content">
                     <div class="card-body ">
@@ -47,9 +47,9 @@
                             </div>
                             <div class="col-12 text-light rounded-4">
                                 <h3 class="text-left text-warning ">
-                                     <span class="text-light text-wrap fs-6">Για κάθε &euro; που κερδίζετε, έχεται δαπανήσει</span>
+                                     <span class="text-light text-wrap fs-6">Για κάθε &euro; που κερδίζετε, έχεται δαπανήσει</span><br>
                                     <em> <i class="fa-solid {% if expense_to_income_ratio < 1 %}fa-caret-up text-success{% else %}fa-caret-down  text-danger{% endif %}"></i> {{expense_to_income_ratio|floatformat:2 }}</em>
-                                    <span class="text-light text-wrap fs-6"><br>μονάδες</span>
+                                    <span class="text-light text-wrap fs-6">μονάδες</span>
                                 </h3>     
                             </div>               
                         </div>
@@ -59,7 +59,7 @@
         </div>
     {% include 'dash/card.html' with title='Εσοδα (&euro;)' info=total_income|floatformat:2 icon='<i class="fa-solid fa-cash-register text-success"></i>'%}
     {% include 'dash/card.html' with title='Εξοδα (&euro;)' info=total_payments|floatformat:2 icon='<i class="fa-solid fa-sack-dollar text-danger"></i>' %}
-    {% include 'dash/card.html' with title='Πηγες Εσόδων' info=num_sources icon='<i class="fa-solid fa-store text-primary"></i>' %}
+    {% include 'dash/card.html' with title='Πηγες' info=num_sources icon='<i class="fa-solid fa-store text-primary"></i>' %}
     {% include 'dash/card.html' with title='Παραλήπτες' info=num_payees icon='<i class="fa-solid fa-users text-primary"></i>' %}
   
 </div>

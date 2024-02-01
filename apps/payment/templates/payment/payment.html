@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Πληρωμές{% endblock %}
+{% block title %}Δαπάνες{% endblock %}
 
 {% block content %}
 
-{% include 'misc/page_title.html' with title='Εσοδα / Εξοδα' %}
+{% include 'misc/page_title.html' with title='Δαπάνες' %}
 
 {% include 'payment/misc/buttons.html' %}
 {% include 'misc/form.html' %}
@@ -17,7 +17,7 @@
         <tr class="bg-gradient">
         <th scope="col">Παραληπτης</th>       
         <th scope="col">Ποσο &#8364;</th>  
-        <th scope="col paid-col ">Paid</th>  
+        <th scope="col paid-col "></th>  
         <th scope="col">Ημερ/νια</th>  
         <th scope="col">Actions</th>      
         </tr>
@@ -25,7 +25,7 @@
         <tbody>  
             {% if objs %}         
                 {% for obj in objs %}
-                    <tr class="{% if obj.paid %}text-success{% else %}text-danger bg-dark bg-gradient{% endif %}">
+                    <tr class="{% if obj.paid %}text-dark{% else %}text-danger bg-dark bg-gradient{% endif %}">
                         <td data-label="Παραληπτης">{{obj.payee}}</td>
                         <td data-label="Ποσο" >{{obj.amount}}</td>
                         <td data-label="Paid">

@@ -1,14 +1,29 @@
-<div class="container align-content-end text-end w-75 pb-2">
-   <div class="btn-group flex-column flex-sm-row">
-      <a type="button" href="{% url 'payment:income' %}" class="btn btn-success bg-gradient me-2">Εσοδα <i class="fa-solid fa-coins"></i></a>
-
-      <a type="button" href="{% url 'payment:payment' %}" class="btn btn-danger me-2 bg-gradient">Εξοδα <i class="fa-solid fa-list"></i></a>
-
-      <a type="button" href="{% url 'payment:payee' %}" class="btn btn-primary bg-gradient me-2">Παραλήπτες <i class="fa-solid fa-users"></i></a>
-      <a type="button" href="{% url 'payment:payee-label' %}" class="btn btn-warning bg-gradient  me-2">Κατηγορίες <i class="fa-solid fa-tags"></i></a>
-      <a type="button" href="{% url 'payment:source' %}" class="btn btn-dark bg-gradient me-2">Πηγες Εσόδων <i class="fa-solid fa-vault"></i></a>
-      <a type="button" href="{% url 'payment:statistics' %}" class="btn btn-light bg-gradient me-2">
-         Στατιστικα <i class="fa-solid fa-chart-simple"></i></a>
-
+<div class="container text-center pb-2">
+   <div class="btn-group flex-row">
+      <a type="button" href="{% url 'payment:income' %}" class="btn btn-success bg-gradient me-2">
+         Εισοδήματα <i class="fa-solid fa-coins"></i></a>
+      <a type="button" href="{% url 'payment:payment' %}" class="btn btn-danger me-2 bg-gradient">
+         Δαπάνες <i class="fa-solid fa-list"></i></a>
+      {% if not request.resolver_match.url_name == 'statistics' %}
+         <a type="button" href="{% url 'payment:statistics' %}" class="btn btn-light bg-gradient me-2">
+            Στατιστικα <i class="fa-solid fa-chart-simple"></i></a>
+      {% endif %}
+      <div class="dropdown ">
+         <button class="btn btn-dark bg-gradient dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Assets
+         </button>
+         <ul class="dropdown-menu bg-dark bg-gradient" aria-labelledby="dropdownMenuButton1">
+            <li><a type="button" href="{% url 'payment:payee' %}" 
+               class="btn btn-outline-danger  bg-gradient text-start w-100">
+               <i class="fa-solid fa-users"></i> Παραλήπτες</a></li>
+            <li><a type="button" href="{% url 'payment:payee-label' %}" 
+               class="btn btn-outline-success text-start  w-100 ">
+               <i class="fa-solid fa-tags"></i> Κατηγορίες</a></li>
+            <li><a type="button" href="{% url 'payment:source' %}" class="btn btn-outline-light text-start  me-2 w-100">
+               <i class="fa-solid fa-vault"></i> Πηγες</a></li>
+            </li>
+         </ul>
+      </div>     
    </div>
 </div>
+
