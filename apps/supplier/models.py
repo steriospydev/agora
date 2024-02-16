@@ -24,7 +24,7 @@ class Supplier(TimeStampedModel):
                                     regex=r"^[0-9]{9}$",
                                     message="Invalid Greek TIN number."
                                             " It must contain 9 digits.")],
-                               unique=True)
+                               unique=True) 
     summary = models.TextField("Περιγραφή", blank=True)
     
     class Meta:
@@ -49,8 +49,9 @@ class Supplier(TimeStampedModel):
         super().delete()
 
 class Shop(TimeStampedModel):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    shop_code = models.CharField(max_length=30, unique=True)    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+                          editable=False)
+    shop_code = models.CharField(max_length=30, unique=True)        
     assigned = models.BooleanField(default=False)
     
     class Meta:
@@ -58,10 +59,11 @@ class Shop(TimeStampedModel):
 
     def __str__(self) -> str:
          return f'{self.shop_code}'
+  
     
-
 class SupplierShop(TimeStampedModel):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+                          editable=False)
     shop_id = models.OneToOneField('Shop', on_delete=models.CASCADE)
     supplier_id = models.OneToOneField('Supplier', on_delete=models.CASCADE)
 
